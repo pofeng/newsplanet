@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>公民新聞大亂鬥</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript">
+    function pipeCallback(obj){ 
+      var x;
+      for (x = 0; x < obj.count ; x++){
+        links += '<div class="item"><h3><a href=' + obj.value.items[x].link + '>' + obj.value.items[x].title + '</a></h3>'+
+        '<div class="time">' + obj.value.items[x].pubDate + '</div>'+
+        '<div class="desc">' + obj.value.items[x].description + '</div>'+
+        '</div>';
+      }
+      $("#links").html(links);
+    }
+  </script>
+</head>
+<body>
+<h1>公民媒體大亂鬥</h1>
+<script>
+  (function() {
+    var cx = '000300823391303551595:dacmu1ptct8';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchbox></gcse:searchbox>
+<gcse:searchresults></gcse:searchresults>
+<div id="monocontainer">
+  <div id="links">Loading...</div>
+</div><!--container-->
+<script type="text/javascript" src="http://pipes.yahoo.com/pipes/pipe.run?_id=ce3c84ad49c9b57f6911228b10ecae54&_render=json&_callback=pipeCallback"></script>
+</body>
+</html>
