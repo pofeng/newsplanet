@@ -6,16 +6,15 @@
 
   <title>News Planet - 輕鬆閱讀10億以下資本額的媒體們</title>
   <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cosmo/bootstrap.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
   <style>
    body { font-family: "Open Sans",'\5FAE\8F6F\96C5\9ED1','微軟正黑體', sans-serif; }
    #___gcse_0 {max-width:500px;}
-   .thumb { text-align: center; }
-   .thumb img {height: 180px;}
-   .col-lg-4 {max-height: 500px;}
-   h3.title { font-family: "Open Sans",'\5FAE\8F6F\96C5\9ED1','微軟正黑體', sans-serif; }
-   #items {
-     margin-top: 60px;
-   }
+   .thumb img {max-width: 500px;}
+   h3.featurette-heading { font-family: "Open Sans",'\5FAE\8F6F\96C5\9ED1','微軟正黑體', sans-serif; }
+   #items { margin-top: 60px; }
+   .lead { font-size:18px; }
+   .icon-spinner { font-size: 60px; text-align: center; color: #aaa;}
   </style>
 </head>
 <body>
@@ -23,14 +22,10 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
   function pipeCallback(obj){ 
-    var x, item, desc, img, row, more;
+    var x, item, desc, img, row, more, bw;
     for (x = 0; x < obj.count ; x++){
       if(obj.value.items[x].link.match('.4way')){
         continue;
-      }
-      if(x%3 == 0){
-        $("#items").append(row);
-        row = $('<div class="row"></div>');
       }
       desc = obj.value.items[x].description.replace(/(&#[^;]+;)|(\n|\r|\[|\])/gi, '');
       desc = $(desc);
@@ -42,20 +37,26 @@
         img.removeAttr('align');
         img.removeAttr('style');
         img = img.wrapAll('<div></div>').parent().html(); 
-        img = '<div class="thumb">'+img+'</div>';
+        img = '<div class="thumb col-md-5">'+img+'</div>';
+        bw = 7;
       }
       else{
         img = '';
+        bw = 11;
       }
       desc = obj.value.items[x].description.replace(/<\/?[^>]+>/gi, '');
-      desc = '<span>'+desc.substr(0, 200)+ '...</span>';
-      more = '<span class="btn btn-primary btn-xs"><a style="color:white" href="'+obj.value.items[x].link+'">More...</a></span>';
-      item = '<div class="col-lg-4"><h3 class="title"><a href="' + obj.value.items[x].link + '">' + obj.value.items[x].title + '</a></h3>'+
-      '<div class="well">'+
+      more = '<span class="btn btn-primary btn-xs icon-arrow-right"><a style="color:white" href="'+obj.value.items[x].link+'">More...</a></span>';
+      desc = '<p class="lead">'+desc.substr(0, 350)+ '...'+more+'</p>';
+      item = '<div class="row featurette">'+
+      '<div class="col-md-'+bw+'">'+
+      '<h3 class="featurette-heading"><a href="' + obj.value.items[x].link + '" target="_blank">' + obj.value.items[x].title + '</a></h3>'+
       '<div class="time">' + obj.value.items[x].pubDate + '</div>'+
-      '<div class="desc">'+img+desc+more+'</div>'+
-      '</div></div>';
-      $(row).append(item);
+      desc+
+      '</div>' +
+      img+
+      '</div>'+
+      '<hr class="featurette-divider">';
+      $("#items").append(item);
     }
     $("#items > .loading").hide();
   }
@@ -76,11 +77,10 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">媒體大亂鬥</a>
+      <a class="navbar-brand icon-lemon" href="./"> News Planet</a>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/">Home</a></li>
         <li><a href="#" rel="環境">環境</a></li>
         <li><a href="#" rel="勞工">勞工</a></li>
         <li><a href="#" rel="藝術">藝術</a></li>
@@ -105,7 +105,7 @@
   </div>
 </div>
   <gcse:searchresults></gcse:searchresults>
-<div id="items" class="container"><div class="loading">Loading...</div></div>
+<div id="items" class="container"><div class="icon-spinner" align="center"></div></div>
 <script type="text/javascript" src="http://pipes.yahoo.com/pipes/pipe.run?_id=ce3c84ad49c9b57f6911228b10ecae54&_render=json&_callback=pipeCallback"></script>
 </body>
 </html>
